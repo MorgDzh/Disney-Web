@@ -1,9 +1,12 @@
-import React from 'react'
+import './App.css';
+import Navigation from './Navigation';
 
-const App = () => {
+function App() {
   return (
-    <div>App</div>
-  )
+    <div className="App">
+      <Navigation />
+    </div>
+  );
 }
 
-export default App
+export default App;
