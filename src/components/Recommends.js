@@ -1,44 +1,25 @@
-import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectRecommend } from "../features/movie/movieSlice";
 
-const Recommends = () => {
+const Recommends = (props) => {
+  const movies = useSelector(selectRecommend);
+  console.log(movies, ":🛢️");
+
   return (
     <Container>
-      <h4>Recommended for you</h4>
+      <h4>Recommended for You</h4>
       <Content>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://m.spletnik.ru/img/2022/03/xenia/20220321dispost.jpg"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://m.spletnik.ru/img/2022/03/xenia/20220321dispost.jpg"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://m.spletnik.ru/img/2022/03/xenia/20220321dispost.jpg"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://m.spletnik.ru/img/2022/03/xenia/20220321dispost.jpg"
-              alt=""
-            />
-          </Link>
-        </Wrap>
+        {movies &&
+          movies.map((movie, key) => (
+            <Wrap key={key}>
+              {movie.id}
+              <Link to={`/detail/` + movie.id}>
+                <img src={movie.cardImg} alt={movie.title} />
+              </Link>
+            </Wrap>
+          ))}
       </Content>
     </Container>
   );
@@ -53,7 +34,6 @@ const Content = styled.div`
   grid-gap: 25px;
   gap: 25px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
