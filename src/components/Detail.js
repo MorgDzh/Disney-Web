@@ -1,20 +1,42 @@
 import React from "react";
 import styled from "styled-components";
+import db from "../firebase";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Detail = () => {
+  const { id } = useParams();
+  const [detailData, setDetailData] = useState({});
+
+  useEffect(() => {
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setDetailData(doc.data());
+        } else {
+          console.log("No such document in firebase!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document:", error);
+      });
+  }, [id]);
+
   return (
     <Container>
       <Background>
         <img
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/2A509165105A09F9F533E2008B143BCF38D6A5859D0EBB40CCA388772005CD94/scale?width=1440&aspectRatio=1.78&format=jpeg"
-          alt=""
+          src={detailData.backgroundImg}
+          alt={detailData.title}
         />
       </Background>
 
       <ImageTitle>
         <img
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/DD8BBA864E290FBC03A244A488FFC8DC8365FBF2F95A122B1D57BF3772D717FD/scale?width=1440&aspectRatio=1.78"
-          alt=""
+          src={detailData.titleImg}
+          alt={detailData.title}
         />
       </ImageTitle>
       <ContentMeta>
@@ -38,6 +60,8 @@ const Detail = () => {
           </GroupWatch>
         </Controls>
       </ContentMeta>
+      <SubTitle>{detailData.subTitle}</SubTitle>
+      <Description>{detailData.description}</Description>
     </Container>
   );
 };
@@ -194,7 +218,28 @@ const GroupWatch = styled.div`
   }
 
   img {
-      width: 100%;
+    width: 100%;
+  }
+`;
+
+const SubTitle = styled.div`
+  color: rgb(249, 294, 249);
+  font-size: 15px;
+  min-height: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
+const Description = styled.div`
+  line-height: 1.4;
+  font-size: 20px;
+  padding: 16px 0px;
+  color: rgb(249, 249, 249);
+
+  @media (max-width: 768px) {
+    font-size: 14px;
   }
 `;
 
