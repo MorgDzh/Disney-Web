@@ -8,7 +8,7 @@ import {
   setUserLoginDetails,
   setSignOutState,
 } from "../features/user/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -58,9 +58,11 @@ const Header = (props) => {
 
   return (
     <Nav>
-      <Logo>
-        <img src="/images/logo.svg" alt="Disney+" />
-      </Logo>
+      <Link to="/">
+        <Logo>
+          <img src="/images/logo.svg" alt="Disney+" />
+        </Logo>
+      </Link>
 
       {!userName ? (
         <Login onClick={handleAuth}>Login</Login>

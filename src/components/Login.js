@@ -8,6 +8,7 @@ const Login = (props) => {
         <CTA>
           <CTALogoOne src="/images/cta-logo-one.svg" alt="one-logo" />
           <SignUp>GET ALL THERE</SignUp>
+          <Alert>Please login to view content</Alert>
           <Description>
             Get Premier Access to Raya and the Last Dragon for an additional fee
             with a Disney+ subscription. As of 03/26/21, the price of Disney+
@@ -88,6 +89,17 @@ const SignUp = styled.a`
   &:hover {
     background-color: #0483ee;
   }
+`;
+
+const Alert = styled.h2`
+  font-weight: bold;
+  color: #f9f9f9;
+  margin-bottom: 12px;
+  width: 100%;
+  letter-spacing: 1.5px;
+  font-size: 18px;
+  border: 1px solid transparent;
+  border-radius: 4px;
 `;
 
 const Description = styled.p`
