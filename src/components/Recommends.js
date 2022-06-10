@@ -5,6 +5,8 @@ import { selectRecommend } from "../features/movie/movieSlice";
 
 const Recommends = (props) => {
   const movies = useSelector(selectRecommend);
+  // Снизу консоль показывает сколько данных с fireбдшки пришло в состояние, с багом приходило 8, без бага 4.
+  // console.log(movies, ":🛢️");
 
   return (
     <Container>

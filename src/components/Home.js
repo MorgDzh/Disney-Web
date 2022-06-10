@@ -20,25 +20,48 @@ const Home = (props) => {
   let trending = [];
 
   useEffect(() => {
-    console.log("hello");
     db.collection("movies").onSnapshot((snapshot) => {
       snapshot.docs.map((doc) => {
-        console.log(recommends);
+        // Пофиксил баг с помощью индексации в деструктуризации данных, теперь приходит ровно 4 обьекта с бдшки.
         switch (doc.data().type) {
           case "recommend":
-            recommends = [...recommends, { id: doc.id, ...doc.data() }];
+            recommends = [
+              recommends[1],
+              recommends[2],
+              recommends[3],
+              { id: doc.id, ...doc.data() },
+            ];
+            // recommends = [...recommends, { id: doc.id, ...doc.data() }];
             break;
 
           case "new":
-            newDisneys = [...newDisneys, { id: doc.id, ...doc.data() }];
+            newDisneys = [
+              newDisneys[1],
+              newDisneys[2],
+              newDisneys[3],
+              { id: doc.id, ...doc.data() },
+            ];
+            // newDisneys = [...newDisneys, { id: doc.id, ...doc.data() }];
             break;
 
           case "original":
-            originals = [...originals, { id: doc.id, ...doc.data() }];
+            originals = [
+              originals[1],
+              originals[2],
+              originals[3],
+              { id: doc.id, ...doc.data() },
+            ];
+            // originals = [...originals, { id: doc.id, ...doc.data() }];
             break;
 
           case "trending":
-            trending = [...trending, { id: doc.id, ...doc.data() }];
+            trending = [
+              trending[1],
+              trending[2],
+              trending[3],
+              { id: doc.id, ...doc.data() },
+            ];
+            // trending = [...trending, { id: doc.id, ...doc.data() }];
             break;
         }
       });

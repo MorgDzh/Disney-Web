@@ -20,13 +20,13 @@ const Header = (props) => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
-        navigate("/home")   
+        navigate("/home");
       }
     });
   }, [userName]);
 
   const handleAuth = () => {
-    if (!userName) {  
+    if (!userName) {
       auth
         .signInWithPopup(provider)
         .then((result) => {
@@ -39,8 +39,8 @@ const Header = (props) => {
       auth
         .signOut()
         .then(() => {
-          dispatch(setSignOutState());  
-          navigate("/")
+          dispatch(setSignOutState());
+          navigate("/");
         })
         .catch((err) => alert(err.message));
     }
